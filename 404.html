@@ -2,10 +2,23 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=/">
   <title>Redirigiendo a Mis XV Años — Emily</title>
   <script>
-    window.location.replace("/");
+    (function redirectUnknownRoute() {
+      var path = window.location.pathname || "/";
+      var repoBase = "/landing-misquince-emily/";
+      var isRepoPath = path.toLowerCase().indexOf("/landing-misquince-emily") === 0;
+      var base = isRepoPath ? repoBase : "/";
+
+      // Si el anfitrión escribe /invitados sin .html en GitHub Pages, llevarlo a invitados.html
+      if (/\/invitados\/?$/i.test(path)) {
+        window.location.replace(base + "invitados.html");
+        return;
+      }
+
+      // Cualquier otra ruta desconocida redirige siempre a la página principal de la invitación
+      window.location.replace(base);
+    })();
   </script>
 </head>
 <body></body>
