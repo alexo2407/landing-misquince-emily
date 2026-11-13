@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Lista de Invitados — Mis XV Años Emily</title>
+  <meta name="theme-color" content="#39000A">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600;1,700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="invitados-page-body">
+  <!-- Lienzo de partículas mágicas suaves -->
+  <canvas id="magicParticlesCanvas" class="magic-particles-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header" id="top">
+    <div class="header-ornament header-ornament--left" aria-hidden="true">
+      <img src="assets/adornoizquierda.png" alt="" width="1254" height="1254" decoding="async">
+    </div>
+    <div class="header-ornament header-ornament--right" aria-hidden="true">
+      <img src="assets/dercha.png" alt="" width="1254" height="1254" decoding="async">
+    </div>
+
+    <div class="header-inner">
+      <div class="brand-logo" aria-label="Mis XV Años — Panel Privado de Invitados">
+        <img src="assets/logodorado.png" alt="Mis XV Años" width="2172" height="724" decoding="async">
+      </div>
+      <span class="invitados-private-badge">✦ Panel Privado de Anfitriones ✦</span>
+    </div>
+  </header>
+
+  <main class="invitation-shell invitados-shell">
+    <section class="invitados-section" aria-labelledby="invitadosHeading">
+      <div class="parchment-card invitados-card">
+        <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="card-corner card-corner--tl" width="1254" height="1254">
+        <img src="assets/dercha.png" alt="" aria-hidden="true" class="card-corner card-corner--tr" width="1254" height="1254">
+        <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="card-corner card-corner--bl" width="1254" height="1254">
+        <img src="assets/dercha.png" alt="" aria-hidden="true" class="card-corner card-corner--br" width="1254" height="1254">
+
+        <header class="card-plaque invitados-card__plaque">
+          <img
+            src="assets/decor/card-plaque.png"
+            alt=""
+            aria-hidden="true"
+            class="card-plaque__img"
+            width="1036"
+            height="260"
+          >
+          <h1 class="card-plaque__title" id="invitadosHeading">Lista de Invitados</h1>
+        </header>
+
+        <p class="invitados-subtitle">
+          Control de asistencias confirmadas para la celebración de los XV Años de <strong>Emily</strong>.
+        </p>
+
+        <!-- Barra de herramientas y acciones -->
+        <div class="invitados-toolbar">
+          <div class="invitados-stats">
+            <div class="invitados-stat-pill">
+              <span class="invitados-stat-pill__label">Total confirmados:</span>
+              <strong class="invitados-stat-pill__value" id="totalGuestsCount">0</strong>
+            </div>
+          </div>
+
+          <div class="invitados-controls">
+            <div class="invitados-search-wrap">
+              <input
+                type="search"
+                id="searchGuestInput"
+                class="rsvp-input invitados-search-input"
+                placeholder="Buscar por nombre..."
+                aria-label="Buscar invitado por nombre"
+              >
+            </div>
+
+            <button type="button" id="downloadCsvBtn" class="btn-burgundy-cta invitados-download-btn">
+              <span>Descargar CSV (Excel)</span>
+            </button>
+
+            <button type="button" id="clearAllGuestsBtn" class="btn-gold invitados-clear-btn">
+              <span>Limpiar lista</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tabla de invitados confirmados -->
+        <div class="invitados-table-wrap" role="region" aria-label="Tabla de invitados confirmados" tabindex="0">
+          <table class="invitados-table" id="guestsTable">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre de la Persona</th>
+                <th scope="col">Estado de Asistencia</th>
+                <th scope="col">Fecha y Hora</th>
+                <th scope="col" class="invitados-col-action-head">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="guestsTableBody">
+              <tr>
+                <td colspan="5" class="invitados-empty-cell">Cargando invitados confirmados…</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <img
+          src="assets/decor/rose-bottom-flourish.png"
+          alt=""
+          aria-hidden="true"
+          class="regalos-bottom-rose"
+          width="655"
+          height="118"
+        >
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-visual">
+        <img
+          src="assets/footer.png"
+          alt="Cierre decorativo en terciopelo burdeos con rosas rojas y rosa encantada"
+          class="footer-img"
+          width="2172"
+          height="724"
+        >
+      </div>
+    </footer>
+  </main>
+
+  <!-- Modal de confirmación para limpiar la lista -->
+  <div id="confirmClearModal" class="magic-modal" role="dialog" aria-modal="true" aria-labelledby="confirmClearTitle" aria-hidden="true">
+    <div id="confirmClearBackdrop" class="magic-modal__backdrop"></div>
+    <div class="magic-modal__card invitados-confirm-modal-card">
+      <h2 id="confirmClearTitle" class="magic-modal__title">¿Limpiar toda la lista?</h2>
+      <p class="invitados-confirm-modal-text">
+        Se eliminarán todos los registros actuales de invitados confirmados. Esta acción dejará la lista completamente en cero.
+      </p>
+      <div class="invitados-confirm-modal-actions">
+        <button type="button" id="cancelClearBtn" class="btn-gold invitados-action-btn">
+          <span>Cancelar</span>
+        </button>
+        <button type="button" id="confirmClearBtn" class="btn-burgundy-cta invitados-download-btn">
+          <span>Sí, limpiar todo</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function initInvitadosPage() {
+      "use strict";
+
+      const STORAGE_KEY = "quince_emily_invitados_v1";
+      const tbody = document.getElementById("guestsTableBody");
+      const totalEl = document.getElementById("totalGuestsCount");
+      const searchInput = document.getElementById("searchGuestInput");
+      const downloadCsvBtn = document.getElementById("downloadCsvBtn");
+      const clearAllBtn = document.getElementById("clearAllGuestsBtn");
+
+      const confirmClearModal = document.getElementById("confirmClearModal");
+      const confirmClearBackdrop = document.getElementById("confirmClearBackdrop");
+      const cancelClearBtn = document.getElementById("cancelClearBtn");
+      const confirmClearBtn = document.getElementById("confirmClearBtn");
+
+      let allGuests = [];
+
+      function getLocalGuests() {
+        try {
+          const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (err) {
+          return [];
+        }
+      }
+
+      function setLocalGuests(list) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+        } catch (err) {
+          // Ignorar si localStorage está restringido
+        }
+      }
+
+      function buildCsvFromList(guests) {
+        const escapeCsv = (val) => {
+          const str = String(val == null ? "" : val).replace(/"/g, '""');
+          return `"${str}"`;
+        };
+        const header = ["No.", "Nombre del Invitado", "Estado de Asistencia", "Fecha y Hora"].join(",");
+        const rows = guests.map((g, i) =>
+          [
+            i + 1,
+            escapeCsv(g.nombre),
+            escapeCsv(g.estado || "Asistencia confirmada"),
+            escapeCsv(g.fecha)
+          ].join(",")
+        );
+        return "\uFEFF" + [header].concat(rows).join("\r\n") + "\r\n";
+      }
+
+      function escapeHtml(str) {
+        const div = document.createElement("div");
+        div.textContent = String(str || "");
+        return div.innerHTML;
+      }
+
+      function renderTable(filterText = "") {
+        const query = String(filterText || "").trim().toLowerCase();
+        const filtered = query
+          ? allGuests.filter((g) => String(g.nombre || "").toLowerCase().includes(query))
+          : allGuests;
+
+        if (totalEl) {
+          totalEl.textContent = String(allGuests.length);
+        }
+
+        if (clearAllBtn) {
+          clearAllBtn.disabled = allGuests.length === 0;
+        }
+
+        if (!tbody) return;
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="5" class="invitados-empty-cell">
+                ${
+                  query
+                    ? "No se encontraron invitados que coincidan con la búsqueda."
+                    : "Aún no hay asistencias confirmadas en la lista."
+                }
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filtered
+          .map(
+            (guest, idx) => `
+              <tr>
+                <td class="invitados-col-num">${escapeHtml(guest.id || idx + 1)}</td>
+                <td class="invitados-col-name"><strong>${escapeHtml(guest.nombre)}</strong></td>
+                <td class="invitados-col-status">
+                  <span class="invitados-badge-confirmed">✦ ${escapeHtml(guest.estado || "Asistencia confirmada")}</span>
+                </td>
+                <td class="invitados-col-date">${escapeHtml(guest.fecha)}</td>
+                <td class="invitados-col-action">
+                  <button
+                    type="button"
+                    class="invitados-delete-row-btn"
+                    data-delete-id="${escapeHtml(guest.id || idx + 1)}"
+                    aria-label="Eliminar registro de ${escapeHtml(guest.nombre)}"
+                    title="Eliminar este registro"
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            `
+          )
+          .join("");
+      }
+
+      async function loadGuests() {
+        try {
+          const response = await fetch("/api/invitados", { cache: "no-store" });
+          if (!response.ok) throw new Error("API no disponible");
+          const data = await response.json();
+          if (data && Array.isArray(data.guests)) {
+            allGuests = data.guests;
+            setLocalGuests(allGuests);
+            renderTable(searchInput ? searchInput.value : "");
+            return;
+          }
+        } catch (err) {
+          const local = getLocalGuests();
+          allGuests = local.map((item, i) => ({
+            id: i + 1,
+            nombre: item.nombre,
+            estado: item.estado || "Asistencia confirmada",
+            fecha: item.fecha || ""
+          }));
+          renderTable(searchInput ? searchInput.value : "");
+        }
+      }
+
+      async function deleteSingleGuest(targetId) {
+        try {
+          const response = await fetch(`/api/invitados?id=${encodeURIComponent(targetId)}`, {
+            method: "DELETE"
+          });
+          if (response.ok) {
+            const data = await response.json();
+            allGuests = Array.isArray(data.guests) ? data.guests : [];
+            setLocalGuests(allGuests);
+            renderTable(searchInput ? searchInput.value : "");
+            return;
+          }
+        } catch (err) {
+          // Fallback local
+        }
+
+        allGuests = allGuests
+          .filter((g) => Number(g.id) !== Number(targetId))
+          .map((g, idx) => ({ ...g, id: idx + 1 }));
+        setLocalGuests(allGuests);
+        renderTable(searchInput ? searchInput.value : "");
+      }
+
+      async function clearAllGuests() {
+        try {
+          const response = await fetch("/api/invitados?all=1", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ all: true })
+          });
+          if (response.ok) {
+            allGuests = [];
+            setLocalGuests([]);
+            renderTable("");
+            return;
+          }
+        } catch (err) {
+          // Fallback local
+        }
+
+        allGuests = [];
+        setLocalGuests([]);
+        renderTable("");
+      }
+
+      if (tbody) {
+        tbody.addEventListener("click", (event) => {
+          const btn = event.target.closest("[data-delete-id]");
+          if (!btn) return;
+          const id = btn.getAttribute("data-delete-id");
+          if (id) {
+            deleteSingleGuest(id);
+          }
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener("input", () => {
+          renderTable(searchInput.value);
+        });
+      }
+
+      if (downloadCsvBtn) {
+        downloadCsvBtn.addEventListener("click", () => {
+          const csvContent = buildCsvFromList(allGuests);
+          const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "invitados-xv-emily.csv";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+        });
+      }
+
+      function openClearModal() {
+        if (!confirmClearModal || allGuests.length === 0) return;
+        confirmClearModal.classList.add("is-open");
+        confirmClearModal.setAttribute("aria-hidden", "false");
+      }
+
+      function closeClearModal() {
+        if (!confirmClearModal) return;
+        confirmClearModal.classList.remove("is-open");
+        confirmClearModal.setAttribute("aria-hidden", "true");
+      }
+
+      if (clearAllBtn) {
+        clearAllBtn.addEventListener("click", openClearModal);
+      }
+      if (cancelClearBtn) {
+        cancelClearBtn.addEventListener("click", closeClearModal);
+      }
+      if (confirmClearBackdrop) {
+        confirmClearBackdrop.addEventListener("click", closeClearModal);
+      }
+      if (confirmClearBtn) {
+        confirmClearBtn.addEventListener("click", async () => {
+          await clearAllGuests();
+          closeClearModal();
+        });
+      }
+
+      loadGuests();
+    })();
+  </script>
+</body>
+</html>

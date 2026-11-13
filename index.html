@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis XV Años — Emily | Invitación Especial</title>
+  <meta name="description" content="Te espero para celebrar conmigo este día tan especial. Sábado 13 de diciembre, 6:30 p. m. — Recepción en Teatro Abril. Confirma tu asistencia.">
+  <meta name="theme-color" content="#39000A">
+
+  <!-- Open Graph / Compartir en redes y WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_GT">
+  <meta property="og:title" content="Mis XV Años — Emily | Sábado 13 de diciembre">
+  <meta property="og:description" content="Te espero para celebrar conmigo este día tan especial. Recepción en Teatro Abril a las 6:30 p. m.">
+  <meta property="og:image" content="assets/banner_chica.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600;1,700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="is-curtain-locked">
+  <a class="skip-link" href="#inicio">Saltar al contenido principal</a>
+
+  <!-- ==================== AUDIO DE FONDO ==================== -->
+  <audio id="bgMusic" src="sonido.mp3" loop preload="auto"></audio>
+
+  <!-- ==================== LIENZO GLOBAL DE PARTÍCULAS MÁGICAS (ESTILO DISNEY) ==================== -->
+  <canvas id="magicParticlesCanvas" class="magic-particles-canvas" aria-hidden="true"></canvas>
+
+  <!-- ==================== BOTÓN FLOTANTE DE MÚSICA REAL ==================== -->
+  <button
+    type="button"
+    id="musicToggleBtn"
+    class="music-floating-btn"
+    aria-pressed="false"
+    aria-label="Reproducir música de fondo"
+    title="Música de fondo"
+  >
+    <span class="music-floating-btn__halo" aria-hidden="true"></span>
+    <span class="music-floating-btn__icon" aria-hidden="true">
+      <svg class="music-icon-note" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18V5l12-2v13"/>
+        <circle cx="6" cy="18" r="3"/>
+        <circle cx="18" cy="16" r="3"/>
+      </svg>
+    </span>
+    <span class="music-equalizer" aria-hidden="true">
+      <span class="music-equalizer__bar"></span>
+      <span class="music-equalizer__bar"></span>
+      <span class="music-equalizer__bar"></span>
+      <span class="music-equalizer__bar"></span>
+    </span>
+    <span class="music-floating-btn__label" id="musicToggleLabel">Música</span>
+  </button>
+
+  <!-- ==================== CORTINA MÁGICA REAL DE APERTURA ==================== -->
+  <div id="magicCurtain" class="magic-curtain" role="dialog" aria-modal="true" aria-labelledby="curtainTitle" aria-describedby="curtainSubtitle">
+    <!-- Cenefa superior real -->
+    <div class="curtain-valance" aria-hidden="true">
+      <img src="assets/adornoizquierda.png" alt="" class="curtain-valance__corner curtain-valance__corner--left" width="1254" height="1254">
+      <img src="assets/dercha.png" alt="" class="curtain-valance__corner curtain-valance__corner--right" width="1254" height="1254">
+      <div class="curtain-valance__fringe"></div>
+    </div>
+
+    <!-- Hoja izquierda del telón de terciopelo -->
+    <div class="curtain-panel curtain-panel--left" aria-hidden="true">
+      <div class="curtain-panel__drapes"></div>
+      <div class="curtain-panel__gold-edge"></div>
+      <img src="assets/adornoizquierda.png" alt="" class="curtain-panel__ornament curtain-panel__ornament--bl" width="1254" height="1254">
+    </div>
+
+    <!-- Hoja derecha del telón de terciopelo -->
+    <div class="curtain-panel curtain-panel--right" aria-hidden="true">
+      <div class="curtain-panel__drapes"></div>
+      <div class="curtain-panel__gold-edge"></div>
+      <img src="assets/dercha.png" alt="" class="curtain-panel__ornament curtain-panel__ornament--br" width="1254" height="1254">
+    </div>
+
+    <!-- Destello dorado mágico al abrir el telón -->
+    <div id="curtainLightFlare" class="curtain-light-flare" aria-hidden="true"></div>
+
+    <!-- Lienzo de polvo de hadas y destellos sobre el telón -->
+    <canvas id="curtainParticlesCanvas" class="curtain-particles-canvas" aria-hidden="true"></canvas>
+
+    <!-- Medallón real central de bienvenida -->
+    <div id="curtainSeal" class="curtain-seal">
+      <div class="curtain-seal__card">
+        <!-- Anillo mágico giratorio estilo cuento de hadas -->
+        <svg class="curtain-seal__ring" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="curtainRingGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFF3B8"/>
+              <stop offset="35%" stop-color="#D8A34A"/>
+              <stop offset="70%" stop-color="#FFF0AE"/>
+              <stop offset="100%" stop-color="#8F5912"/>
+            </linearGradient>
+          </defs>
+          <circle cx="160" cy="160" r="148" stroke="url(#curtainRingGold)" stroke-width="1.5" stroke-dasharray="6 8" opacity="0.78"/>
+          <circle cx="160" cy="160" r="136" stroke="url(#curtainRingGold)" stroke-width="1" opacity="0.45"/>
+          <path d="M160 4 L164 14 L174 18 L164 22 L160 32 L156 22 L146 18 L156 14 Z" fill="#FFF3B8"/>
+          <path d="M160 288 L164 298 L174 302 L164 306 L160 316 L156 306 L146 302 L156 298 Z" fill="#FFF3B8"/>
+          <path d="M4 160 L14 164 L18 174 L22 164 L32 160 L22 156 L18 146 L14 156 Z" fill="#FFF3B8"/>
+          <path d="M288 160 L298 164 L302 174 L306 164 L316 160 L306 156 L302 146 L298 156 Z" fill="#FFF3B8"/>
+        </svg>
+
+        <img
+          src="assets/logodorado.png"
+          alt="Mis XV Años"
+          class="curtain-seal__logo"
+          width="2172"
+          height="724"
+          fetchpriority="high"
+          decoding="async"
+        >
+
+        <div class="curtain-seal__rose-wrap" aria-hidden="true">
+          <span class="curtain-seal__rose-glow"></span>
+          <img
+            src="assets/rosa.png"
+            alt=""
+            class="curtain-seal__rose"
+            width="1122"
+            height="1402"
+            fetchpriority="high"
+            decoding="async"
+          >
+        </div>
+
+        <p class="curtain-seal__eyebrow">Una noche mágica de cuento de hadas</p>
+        <h2 id="curtainTitle" class="curtain-seal__title">Emily</h2>
+        <p id="curtainSubtitle" class="curtain-seal__subtitle">Sábado 13 de diciembre • 6:30 p. m.</p>
+
+        <button type="button" id="openCurtainBtn" class="curtain-open-btn">
+          <span class="curtain-open-btn__sparkle" aria-hidden="true">✦</span>
+          <span class="curtain-open-btn__text">Abrir Invitación</span>
+          <span class="curtain-open-btn__sparkle" aria-hidden="true">✦</span>
+        </button>
+
+        <p class="curtain-seal__hint">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 18V5l12-2v13"/>
+            <circle cx="6" cy="18" r="3"/>
+            <circle cx="18" cy="16" r="3"/>
+          </svg>
+          <span>Toca para abrir el telón y activar la música</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== HEADER Y NAVEGACIÓN ==================== -->
+  <header class="site-header" id="top">
+    <div class="header-ornament header-ornament--left" aria-hidden="true">
+      <img src="assets/adornoizquierda.png" alt="" width="1254" height="1254" decoding="async">
+    </div>
+    <div class="header-ornament header-ornament--right" aria-hidden="true">
+      <img src="assets/dercha.png" alt="" width="1254" height="1254" decoding="async">
+    </div>
+
+    <div class="header-inner">
+      <a href="#inicio" class="brand-logo" aria-label="Mis XV Años — Ir al inicio">
+        <img src="assets/logodorado.png" alt="Mis XV Años" width="2172" height="724" fetchpriority="high" decoding="async">
+      </a>
+
+      <button
+        type="button"
+        class="nav-toggle"
+        id="navToggle"
+        aria-expanded="false"
+        aria-controls="primaryNav"
+        aria-label="Abrir menú de navegación"
+      >
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="#inicio" class="nav-link is-active">Inicio</a></li>
+          <li><a href="#evento" class="nav-link">Evento</a></li>
+          <li><a href="#vestimenta" class="nav-link">Vestimenta</a></li>
+          <li><a href="#regalos" class="nav-link">Regalos</a></li>
+          <li><a href="#confirmacion" class="nav-link">Confirmación</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ==================== CONTENEDOR PERGAMINO PRINCIPAL ==================== -->
+  <main class="invitation-shell">
+
+    <!-- ==================== HERO PRINCIPAL ==================== -->
+    <section class="hero-section" id="inicio" aria-labelledby="heroTitle">
+      <div class="hero-frame">
+        <!-- Ornamentos de esquina del marco real -->
+        <img src="assets/dercha.png" alt="" aria-hidden="true" class="frame-corner frame-corner--tr" width="1254" height="1254">
+        <img src="assets/dercha.png" alt="" aria-hidden="true" class="frame-corner frame-corner--br" width="1254" height="1254">
+
+        <div class="hero-grid">
+          <!-- Columna izquierda: Salón elegante + Fotografía principal -->
+          <div class="hero-visual">
+            <div class="hero-stage">
+              <img
+                src="assets/fonod%20lugar.png"
+                alt="Salón real decorado con cortinas azul marino, candelabros dorados y arreglos de rosas rojas"
+                class="hero-backdrop"
+                width="1672"
+                height="941"
+                fetchpriority="high"
+                decoding="async"
+              >
+              <img
+                src="assets/chica-hero.png"
+                alt="Fotografía principal de la quinceañera luciendo corona y vestido dorado de gala"
+                class="hero-portrait"
+                width="1672"
+                height="941"
+                fetchpriority="high"
+                decoding="async"
+              >
+              <!-- Pétalos decorativos sobre el borde inferior como en la maqueta -->
+              <div class="hero-petals" aria-hidden="true">
+                <span class="petal petal--1"></span>
+                <span class="petal petal--2"></span>
+                <span class="petal petal--3"></span>
+                <span class="petal petal--4"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha: Título ornamental, mensaje, fecha y CTA -->
+          <div class="hero-content reveal-item">
+            <div class="hero-cartouche">
+              <img
+                src="assets/decor/cartouche-quince.png"
+                alt=""
+                aria-hidden="true"
+                class="hero-cartouche__bg"
+                width="1772"
+                height="716"
+                decoding="async"
+              >
+              <h1 class="hero-title" id="heroTitle">Mis XV Años</h1>
+            </div>
+
+            <p class="hero-message">
+              Te espero para celebrar<br>
+              conmigo este día tan especial.
+            </p>
+
+            <!-- Marco ornamental dorado de fecha y hora -->
+            <div class="hero-date-box">
+              <svg class="hero-date-box__svg" viewBox="0 0 560 156" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="goldGradHero" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#9C6518"/>
+                    <stop offset="22%" stop-color="#F7DF8E"/>
+                    <stop offset="48%" stop-color="#D8A34A"/>
+                    <stop offset="76%" stop-color="#FFF0AE"/>
+                    <stop offset="100%" stop-color="#8F5912"/>
+                  </linearGradient>
+                  <linearGradient id="parchmentInner" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#FFF4E4" stop-opacity="0.92"/>
+                    <stop offset="100%" stop-color="#FBE2C4" stop-opacity="0.92"/>
+                  </linearGradient>
+                </defs>
+                <rect x="34" y="20" width="492" height="116" rx="46" fill="url(#parchmentInner)" stroke="url(#goldGradHero)" stroke-width="3.2"/>
+                <rect x="42" y="28" width="476" height="100" rx="40" stroke="#C98E32" stroke-width="1.1" stroke-opacity="0.7"/>
+                <!-- Cresta central superior -->
+                <path d="M242 20 C256 6, 268 4, 280 14 C292 4, 304 6, 318 20" stroke="url(#goldGradHero)" stroke-width="3.5" stroke-linecap="round"/>
+                <path d="M262 17 C270 5, 290 5, 298 17" fill="url(#goldGradHero)"/>
+                <circle cx="280" cy="9" r="4" fill="#F7DF8E" stroke="#8F5912" stroke-width="1"/>
+                <!-- Cresta central inferior -->
+                <path d="M242 136 C256 150, 268 152, 280 142 C292 152, 304 150, 318 136" stroke="url(#goldGradHero)" stroke-width="3.5" stroke-linecap="round"/>
+                <circle cx="280" cy="147" r="3.8" fill="#F7DF8E" stroke="#8F5912" stroke-width="1"/>
+                <!-- Volutas laterales izquierdas -->
+                <path d="M36 52 C16 50, 10 66, 22 78 C10 90, 16 106, 36 104" stroke="url(#goldGradHero)" stroke-width="4" stroke-linecap="round"/>
+                <path d="M48 24 C30 12, 16 24, 26 40" stroke="url(#goldGradHero)" stroke-width="3" stroke-linecap="round"/>
+                <path d="M48 132 C30 144, 16 132, 26 116" stroke="url(#goldGradHero)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="12" cy="78" r="4.2" fill="url(#goldGradHero)"/>
+                <!-- Volutas laterales derechas -->
+                <path d="M524 52 C544 50, 550 66, 538 78 C550 90, 544 106, 524 104" stroke="url(#goldGradHero)" stroke-width="4" stroke-linecap="round"/>
+                <path d="M512 24 C530 12, 544 24, 534 40" stroke="url(#goldGradHero)" stroke-width="3" stroke-linecap="round"/>
+                <path d="M512 132 C530 144, 544 132, 534 116" stroke="url(#goldGradHero)" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="548" cy="78" r="4.2" fill="url(#goldGradHero)"/>
+              </svg>
+              <div class="hero-date-box__content">
+                <p class="hero-date">Sábado 13 de diciembre</p>
+                <p class="hero-time">6:30 p. m.</p>
+              </div>
+            </div>
+
+            <a href="#confirmacion" class="btn-burgundy-cta">
+              <span class="btn-burgundy-cta__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="17" rx="2.5"/>
+                  <line x1="8" y1="2.5" x2="8" y2="6"/>
+                  <line x1="16" y1="2.5" x2="16" y2="6"/>
+                  <line x1="3" y1="9.5" x2="21" y2="9.5"/>
+                  <circle cx="8.5" cy="13.5" r="1" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="13.5" r="1" fill="currentColor" stroke="none"/>
+                  <circle cx="15.5" cy="13.5" r="1" fill="currentColor" stroke="none"/>
+                  <circle cx="8.5" cy="17" r="1" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="17" r="1" fill="currentColor" stroke="none"/>
+                  <circle cx="15.5" cy="17" r="1" fill="currentColor" stroke="none"/>
+                </svg>
+              </span>
+              <span class="btn-burgundy-cta__label">Confirmar asistencia</span>
+              <span class="btn-burgundy-cta__chevron" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 6 15 12 9 18"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Floración dorada inferior derecha -->
+        <img
+          src="assets/decor/rose-bottom-flourish.png"
+          alt=""
+          aria-hidden="true"
+          class="hero-corner-rose"
+          width="655"
+          height="118"
+        >
+      </div>
+    </section>
+
+    <!-- ==================== SECCIÓN EVENTO ==================== -->
+    <section class="evento-section" id="evento" aria-labelledby="recepcionTitle">
+      <div class="section-ornament-wrap">
+        <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="section-corner section-corner--tl" width="1254" height="1254" loading="lazy">
+        <img src="assets/dercha.png" alt="" aria-hidden="true" class="section-corner section-corner--tr" width="1254" height="1254" loading="lazy">
+
+        <div class="evento-grid">
+          <!-- Columna izquierda: Estandarte burdeos con bordes dorados -->
+          <div class="evento-banner-col reveal-item">
+            <div class="velvet-banner">
+              <img
+                src="assets/decor/banderola-clean.png"
+                alt=""
+                aria-hidden="true"
+                class="velvet-banner__bg"
+                width="1054"
+                height="1148"
+                loading="lazy"
+                decoding="async"
+              >
+              <div class="velvet-banner__body">
+                <h2 class="velvet-banner__title" id="recepcionTitle">Recepción</h2>
+                <img
+                  src="assets/decor/rose-divider.png"
+                  alt=""
+                  aria-hidden="true"
+                  class="velvet-banner__divider"
+                  width="656"
+                  height="76"
+                  loading="lazy"
+                >
+                <p class="velvet-banner__venue">Teatro Abril</p>
+                <p class="velvet-banner__address">9na avenida 14-22, zona 1</p>
+
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Teatro+Abril,+9na+avenida+14-22,+zona+1,+Ciudad+de+Guatemala"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-gold btn-gold--banner"
+                  aria-label="Ver ubicación de Teatro Abril en Google Maps (se abre en una pestaña nueva)"
+                >
+                  <span class="btn-gold__icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor">
+                      <path d="M12 2C7.86 2 4.5 5.36 4.5 9.5c0 5.38 6.45 11.75 6.73 12.02a1.1 1.1 0 0 0 1.54 0c.28-.27 6.73-6.64 6.73-12.02C19.5 5.36 16.14 2 12 2zm0 10.25a2.75 2.75 0 1 1 0-5.5 2.75 2.75 0 0 1 0 5.5z"/>
+                    </svg>
+                  </span>
+                  <span>Ver ubicación</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha: Marco ornamental con fecha, hora, rosa bajo cúpula y princesa -->
+          <div class="evento-showcase-col reveal-item">
+            <div class="evento-showcase">
+              <!-- Marco rococó dorado con fecha y hora -->
+              <div class="rococo-date-frame">
+                <svg class="rococo-date-frame__svg" viewBox="0 0 460 250" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="rococoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#8B5610"/>
+                      <stop offset="20%" stop-color="#F8E192"/>
+                      <stop offset="45%" stop-color="#D8A34A"/>
+                      <stop offset="72%" stop-color="#FFF2B6"/>
+                      <stop offset="100%" stop-color="#965F15"/>
+                    </linearGradient>
+                    <radialGradient id="rococoParchment" cx="50%" cy="50%" r="55%">
+                      <stop offset="0%" stop-color="#FFF6E8"/>
+                      <stop offset="100%" stop-color="#F9DEC0"/>
+                    </radialGradient>
+                    <filter id="rococoShadow" x="-10%" y="-10%" width="120%" height="125%">
+                      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#5B3308" flood-opacity="0.28"/>
+                    </filter>
+                  </defs>
+                  <g filter="url(#rococoShadow)">
+                    <!-- Silueta lobulada barroca -->
+                    <path d="M98 48 C135 26, 185 32, 230 22 C275 32, 325 26, 362 48 C402 52, 424 88, 408 125 C424 162, 402 198, 362 202 C325 224, 275 218, 230 228 C185 218, 135 224, 98 202 C58 198, 36 162, 52 125 C36 88, 58 52, 98 48 Z"
+                          fill="url(#rococoParchment)" stroke="url(#rococoGold)" stroke-width="6.5" stroke-linejoin="round"/>
+                    <path d="M106 57 C140 38, 186 43, 230 34 C274 43, 320 38, 354 57 C389 61, 408 92, 394 125 C408 158, 389 189, 354 193 C320 212, 274 207, 230 216 C186 207, 140 212, 106 193 C71 189, 52 158, 66 125 C52 92, 71 61, 106 57 Z"
+                          stroke="#C88E32" stroke-width="1.6" stroke-opacity="0.75" fill="none"/>
+                    <!-- Corona / Florón central superior -->
+                    <path d="M192 27 C206 8, 220 4, 230 20 C240 4, 254 8, 268 27" stroke="url(#rococoGold)" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M216 20 L230 3 L244 20 L230 27 Z" fill="url(#rococoGold)"/>
+                    <!-- Florón inferior -->
+                    <path d="M196 223 C210 240, 222 243, 230 230 C238 243, 250 240, 264 223" stroke="url(#rococoGold)" stroke-width="4.5" stroke-linecap="round"/>
+                    <!-- Ornamentos laterales -->
+                    <path d="M46 100 C22 104, 16 125, 34 125 C16 125, 22 146, 46 150" stroke="url(#rococoGold)" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="16" cy="125" r="5.5" fill="url(#rococoGold)"/>
+                    <path d="M414 100 C438 104, 444 125, 426 125 C444 125, 438 146, 414 150" stroke="url(#rococoGold)" stroke-width="5" stroke-linecap="round"/>
+                    <circle cx="444" cy="125" r="5.5" fill="url(#rococoGold)"/>
+                  </g>
+                </svg>
+                <div class="rococo-date-frame__text">
+                  <p class="rococo-day">Sábado</p>
+                  <p class="rococo-date">13 de diciembre</p>
+                  <p class="rococo-time">6:30 p. m.</p>
+                </div>
+              </div>
+
+              <!-- Rosa encantada bajo cúpula de cristal -->
+              <div class="enchanted-rose-wrap">
+                <img
+                  src="assets/rosa.png"
+                  alt="Rosa roja encantada bajo cúpula de cristal iluminada con base dorada"
+                  class="enchanted-rose-img"
+                  width="1122"
+                  height="1402"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </div>
+
+              <!-- Princesa decorativa de cuerpo completo -->
+              <div class="princess-wrap">
+                <img
+                  src="assets/ChatGPT%20Image%20Nov%2013,%202026,%2010_44_31%20AM-7.png"
+                  alt="Ilustración decorativa de princesa con vestido dorado de gala y tiara"
+                  class="princess-img"
+                  width="1086"
+                  height="1448"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Detalles florales de base de sección -->
+        <div class="evento-bottom-roses" aria-hidden="true">
+          <img src="assets/decor/rose-bottom-flourish.png" alt="" width="655" height="118" loading="lazy">
+          <img src="assets/decor/rose-bottom-flourish.png" alt="" width="655" height="118" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VESTIMENTA Y REGALOS ==================== -->
+    <div class="cards-duo-section">
+      <div class="cards-duo-grid">
+
+        <!-- Tarjeta 1: Código de Vestimenta -->
+        <article class="parchment-card reveal-item" id="vestimenta" aria-labelledby="vestimentaTitle">
+          <!-- Esquinas barrocas doradas -->
+          <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="card-corner card-corner--tl" width="1254" height="1254" loading="lazy">
+          <img src="assets/dercha.png" alt="" aria-hidden="true" class="card-corner card-corner--tr" width="1254" height="1254" loading="lazy">
+          <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="card-corner card-corner--bl" width="1254" height="1254" loading="lazy">
+          <img src="assets/dercha.png" alt="" aria-hidden="true" class="card-corner card-corner--br" width="1254" height="1254" loading="lazy">
+
+          <header class="card-plaque">
+            <img
+              src="assets/decor/card-plaque.png"
+              alt=""
+              aria-hidden="true"
+              class="card-plaque__img"
+              width="1036"
+              height="260"
+              loading="lazy"
+              decoding="async"
+            >
+            <h2 class="card-plaque__title card-plaque__title--long" id="vestimentaTitle">Código de Vestimenta</h2>
+          </header>
+
+          <div class="parchment-card__body parchment-card__body--vestimenta">
+            <p class="vestimenta-headline">Formal de traje</p>
+
+            <div class="vestimenta-figure">
+              <img
+                src="assets/decor/vestimenta-illust.png"
+                alt="Traje formal azul marino y vestido largo de gala azul marino con detalles dorados"
+                width="945"
+                height="412"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+
+            <p class="vestimenta-restriction">Prohibido los colores rojo, amarillo y dorado.</p>
+          </div>
+        </article>
+
+        <!-- Tarjeta 2: Regalos -->
+        <article class="parchment-card reveal-item" id="regalos" aria-labelledby="regalosTitle">
+          <!-- Esquinas barrocas doradas -->
+          <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="card-corner card-corner--tl" width="1254" height="1254" loading="lazy">
+          <img src="assets/dercha.png" alt="" aria-hidden="true" class="card-corner card-corner--tr" width="1254" height="1254" loading="lazy">
+          <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="card-corner card-corner--bl" width="1254" height="1254" loading="lazy">
+          <img src="assets/dercha.png" alt="" aria-hidden="true" class="card-corner card-corner--br" width="1254" height="1254" loading="lazy">
+
+          <header class="card-plaque">
+            <img
+              src="assets/decor/card-plaque.png"
+              alt=""
+              aria-hidden="true"
+              class="card-plaque__img"
+              width="1036"
+              height="260"
+              loading="lazy"
+              decoding="async"
+            >
+            <h2 class="card-plaque__title" id="regalosTitle">Regalos</h2>
+          </header>
+
+          <div class="parchment-card__body parchment-card__body--regalos">
+            <div class="regalos-figure">
+              <img
+                src="assets/decor/regalos-illust.png"
+                alt="Caja de obsequio azul con moño dorado junto a un sobre dorado con corazón rojo"
+                width="800"
+                height="245"
+                loading="lazy"
+                decoding="async"
+              >
+            </div>
+
+            <p class="regalos-text">
+              El mejor regalo será tu compañía<br>
+              en este día tan especial.<br>
+              Si deseas obsequiarme algo,<br>
+              agradeceré sobres de dinero.
+            </p>
+
+            <img
+              src="assets/decor/rose-bottom-flourish.png"
+              alt=""
+              aria-hidden="true"
+              class="regalos-bottom-rose"
+              width="655"
+              height="118"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- ==================== BANNER DE TRANSICIÓN ==================== -->
+    <section class="transition-banner-section reveal-item" aria-label="Retrato de celebración">
+      <div class="transition-banner-wrap">
+        <img
+          src="assets/banner_chica.png"
+          alt="Quinceañera enmarcada en ornamentos barrocos dorados con cortinas azul marino y rosas rojas"
+          class="transition-banner-img"
+          width="2172"
+          height="724"
+          loading="lazy"
+          decoding="async"
+        >
+      </div>
+    </section>
+
+    <!-- ==================== SECCIÓN CONFIRMACIÓN ==================== -->
+    <section class="confirmacion-section" id="confirmacion" aria-labelledby="confirmacionTitle">
+      <div class="confirmacion-frame reveal-item">
+        <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="rsvp-corner rsvp-corner--tl" width="1254" height="1254" loading="lazy">
+        <img src="assets/dercha.png" alt="" aria-hidden="true" class="rsvp-corner rsvp-corner--tr" width="1254" height="1254" loading="lazy">
+
+        <div class="confirmacion-heading-wrap">
+          <svg class="rsvp-swash rsvp-swash--left" viewBox="0 0 120 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M118 16 C82 16, 48 8, 22 18 C8 23, 6 33, 18 33 C28 33, 30 24, 22 22" stroke="#650715" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="96" cy="14" r="2" fill="#650715"/>
+          </svg>
+          <h2 class="confirmacion-title" id="confirmacionTitle">Confirma tu asistencia</h2>
+          <svg class="rsvp-swash rsvp-swash--right" viewBox="0 0 120 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2 16 C38 16, 72 8, 98 18 C112 23, 114 33, 102 33 C92 33, 90 24, 98 22" stroke="#650715" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="24" cy="14" r="2" fill="#650715"/>
+          </svg>
+        </div>
+
+        <p class="confirmacion-message">
+          Será un honor contar con tu presencia.<br>
+          Por favor, confirma tu asistencia<br>
+          a más tardar el 24 de noviembre.
+        </p>
+
+        <!-- Formulario compacto de confirmación directa -->
+        <form id="rsvpForm" class="rsvp-form-card" novalidate aria-label="Formulario rápido para confirmar asistencia">
+          <div class="rsvp-form-card__inner">
+            <label for="guestNameInput" class="rsvp-form-card__label">
+              Registra tu nombre para confirmar tu asistencia:
+            </label>
+            <div class="rsvp-form-card__row">
+              <input
+                type="text"
+                id="guestNameInput"
+                name="guestName"
+                class="rsvp-input"
+                placeholder="Escribe tu nombre y apellido..."
+                autocomplete="name"
+                maxlength="90"
+                required
+              >
+              <button type="submit" id="submitRsvpBtn" class="btn-burgundy-cta rsvp-submit-btn">
+                <span class="rsvp-submit-btn__sparkle" aria-hidden="true">✦</span>
+                <span id="submitRsvpLabel">Confirmar asistencia</span>
+                <span class="rsvp-submit-btn__sparkle" aria-hidden="true">✦</span>
+              </button>
+            </div>
+            <p id="rsvpFormFeedback" class="rsvp-form-feedback" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <p class="confirmacion-whatsapp-caption">O confirma directamente por WhatsApp:</p>
+
+        <div class="confirmacion-actions">
+          <!-- Botón 1: Emily -->
+          <a
+            href="#confirmacion"
+            id="btnWhatsappEmily"
+            class="btn-gold btn-gold--rsvp"
+            data-contact="emily"
+            aria-label="Confirmar asistencia por WhatsApp con Emily"
+          >
+            <span class="btn-gold__icon" aria-hidden="true">
+              <svg viewBox="0 0 28 28" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="14" cy="9.5" r="4.5"/>
+                <path d="M5.5 23.5c0-4.4 3.8-7.5 8.5-7.5s8.5 3.1 8.5 7.5Z"/>
+              </svg>
+            </span>
+            <span class="btn-gold__text">Emily</span>
+          </a>
+
+          <!-- Botón 2: Mamá -->
+          <a
+            href="#confirmacion"
+            id="btnWhatsappMama"
+            class="btn-gold btn-gold--rsvp"
+            data-contact="mama"
+            aria-label="Confirmar asistencia por WhatsApp con Mamá"
+          >
+            <span class="btn-gold__icon" aria-hidden="true">
+              <svg viewBox="0 0 32 28" width="27" height="24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11.5" cy="9" r="4.3"/>
+                <path d="M3.5 23.5c0-4.2 3.6-7.2 8-7.2s8 3 8 7.2Z"/>
+                <circle cx="22.5" cy="11.5" r="3.2"/>
+                <path d="M18.5 23.5c.6-2.9 2.6-5 5.5-5 2.6 0 4.8 1.9 5.3 5Z"/>
+              </svg>
+            </span>
+            <span class="btn-gold__text">Mamá</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-footer">
+      <div class="footer-visual">
+        <img
+          src="assets/footer.png"
+          alt="Cierre decorativo en terciopelo burdeos con rosas rojas, ornamentos dorados y rosa encantada bajo cúpula de cristal"
+          class="footer-img"
+          width="2172"
+          height="724"
+          loading="lazy"
+          decoding="async"
+        >
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ==================== MODAL MÁGICO PERSONALIZADO DE AGRADECIMIENTO ==================== -->
+  <div
+    id="thankYouModal"
+    class="magic-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+    aria-describedby="modalSpeech"
+    aria-hidden="true"
+  >
+    <div id="magicModalBackdrop" class="magic-modal__backdrop"></div>
+
+    <div class="magic-modal__card">
+      <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="magic-modal__corner magic-modal__corner--tl" width="1254" height="1254">
+      <img src="assets/dercha.png" alt="" aria-hidden="true" class="magic-modal__corner magic-modal__corner--tr" width="1254" height="1254">
+      <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="magic-modal__corner magic-modal__corner--bl" width="1254" height="1254">
+      <img src="assets/dercha.png" alt="" aria-hidden="true" class="magic-modal__corner magic-modal__corner--br" width="1254" height="1254">
+
+      <button type="button" id="closeModalTopBtn" class="magic-modal__close-x" aria-label="Cerrar mensaje de agradecimiento">
+        ✕
+      </button>
+
+      <div class="magic-modal__rose-wrap" aria-hidden="true">
+        <span class="magic-modal__rose-aura"></span>
+        <img src="assets/rosa.png" alt="" class="magic-modal__rose" width="1122" height="1402">
+      </div>
+
+      <p class="magic-modal__eyebrow">✦ Confirmación Real Registrada ✦</p>
+
+      <h3 id="modalTitle" class="magic-modal__title">
+        ¡Gracias de corazón, <span id="modalGuestName" class="magic-modal__guest-highlight">Invitado</span>!
+      </h3>
+
+      <div id="modalSpeech" class="magic-modal__speech">
+        <p>
+          Dicen que los cuentos de hadas más hermosos no se escriben en libros, sino en el corazón de las personas que iluminan nuestra vida.
+          Querido/a <strong id="modalSpeechName">Invitado</strong>, saber que me acompañarás en esta conmemoración tan especial enciende una estrella más en este sueño hecho realidad.
+        </p>
+        <p>
+          Gracias por ser parte de mis <strong>XV Años</strong> y acompañarme en una velada donde la magia, la ilusión y la alegría vestirán de gala nuestro corazón.
+          ¡El salón real te espera el <strong>sábado 13 de diciembre a las 6:30 p. m.</strong>!
+        </p>
+      </div>
+
+      <p class="magic-modal__signature">Con todo mi cariño, Emily 🌹✨</p>
+
+      <button type="button" id="closeModalBtn" class="curtain-open-btn magic-modal__cta">
+        <span class="curtain-open-btn__sparkle" aria-hidden="true">✦</span>
+        <span>¡Allí estaré para celebrar!</span>
+        <span class="curtain-open-btn__sparkle" aria-hidden="true">✦</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- GSAP 3 + ScrollTrigger para animaciones mágicas de presentación -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

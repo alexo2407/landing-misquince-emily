@@ -1,0 +1,10 @@
+{
+  "name": "landing-misquince-emily",
+  "version": "1.0.0",
+  "description": "Invitación digital Mis XV Años — Emily con cortina mágica, partículas Disney, animaciones GSAP, audio de fondo y registro de invitados",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "private": true
+}
