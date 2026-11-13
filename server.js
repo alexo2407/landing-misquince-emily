@@ -231,9 +231,25 @@ http
         relPath = "invitados.html";
       }
 
-      const filePath = path.resolve(ROOT, relPath);
+      let filePath = path.resolve(ROOT, relPath);
       if (!filePath.toLowerCase().startsWith(ROOT.toLowerCase())) {
         return redirectToHome(res);
+      }
+
+      // Si el robot de vista previa de WhatsApp/redes solicita miniatura.png,
+      // entregar la versión optimizada (< 205 KB) para garantizar que WhatsApp muestre la imagen
+      const userAgent = String(req.headers["user-agent"] || "");
+      const isSocialCrawler = /whatsapp|facebookexternalhit|facebot|telegrambot|twitterbot|slackbot/i.test(
+        userAgent
+      );
+      if (
+        isSocialCrawler &&
+        relPath.replace(/\\/g, "/").toLowerCase() === "assets/miniatura.png"
+      ) {
+        const optimizedThumb = path.join(ROOT, "assets", "decor", "miniatura-whatsapp.jpg");
+        if (fs.existsSync(optimizedThumb)) {
+          filePath = optimizedThumb;
+        }
       }
 
       fs.stat(filePath, (err, stat) => {
@@ -244,6 +260,25 @@ http
 
         const ext = path.extname(filePath).toLowerCase();
         const contentType = MIME[ext] || "application/octet-stream";
+
+        // En index.html, resolver automáticamente la URL absoluta de assets/miniatura.png para WhatsApp
+        if (relPath === "index.html" && req.headers.host) {
+          const protoHeader = String(req.headers["x-forwarded-proto"] || "").split(",")[0].trim();
+          const proto = protoHeader || (req.headers.host.includes("127.0.0.1") || req.headers.host.includes("localhost") ? "http" : "https");
+          const baseUrl = `${proto}://${req.headers.host}`;
+          const html = fs
+            .readFileSync(filePath, "utf8")
+            .replace(/content="assets\/miniatura\.png"/g, `content="${baseUrl}/assets/miniatura.png"`)
+            .replace(/href="assets\/miniatura\.png"/g, `href="${baseUrl}/assets/miniatura.png"`);
+          const buf = Buffer.from(html, "utf8");
+          res.writeHead(200, {
+            "Content-Type": contentType,
+            "Content-Length": buf.length,
+            "Cache-Control": "no-cache"
+          });
+          return res.end(buf);
+        }
+
         const range = req.headers.range;
 
         const extraHeaders = {};
