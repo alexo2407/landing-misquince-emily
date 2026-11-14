@@ -216,27 +216,21 @@
         <img src="assets/dercha.png" alt="" aria-hidden="true" class="frame-corner frame-corner--br" width="1254" height="1254">
 
         <div class="hero-grid">
-          <!-- Columna izquierda: Salón elegante + Fotografía principal -->
+          <!-- Columna izquierda: Salón elegante + Video principal de la quinceañera -->
           <div class="hero-visual">
             <div class="hero-stage">
-              <img
-                src="assets/fonod%20lugar.png"
-                alt="Salón real decorado con cortinas azul marino, candelabros dorados y arreglos de rosas rojas"
-                class="hero-backdrop"
-                width="1672"
-                height="941"
-                fetchpriority="high"
-                decoding="async"
-              >
-              <img
-                src="assets/chica-hero.png"
-                alt="Fotografía principal de la quinceañera luciendo corona y vestido dorado de gala"
-                class="hero-portrait"
-                width="1672"
-                height="941"
-                fetchpriority="high"
-                decoding="async"
-              >
+              <video
+                id="heroVideo"
+                class="hero-video"
+                src="assets/hero-emily.mp4"
+                poster="assets/chica-hero.png"
+                autoplay
+                loop
+                muted
+                playsinline
+                preload="auto"
+                aria-label="Video principal de la quinceañera Emily sonriendo en el salón real"
+              ></video>
               <!-- Pétalos decorativos sobre el borde inferior como en la maqueta -->
               <div class="hero-petals" aria-hidden="true">
                 <span class="petal petal--1"></span>

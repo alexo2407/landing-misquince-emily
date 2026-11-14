@@ -713,26 +713,23 @@ const GUESTS_STORAGE_KEY = "quince_emily_invitados_v1";
         0
       )
       .fromTo(
-        ".hero-backdrop",
-        { scale: 1.1 },
-        { scale: 1, duration: 2.0, ease: "power2.out", clearProps: "transform" },
-        0
-      )
-      .fromTo(
-        ".hero-portrait",
-        { y: 34, scale: 0.95, opacity: 0.2 },
+        ".hero-video, .hero-backdrop",
+        { scale: 1.06, opacity: 0.35 },
         {
-          y: 0,
           scale: 1,
           opacity: 1,
-          duration: 1.25,
-          ease: "power3.out",
+          duration: 1.5,
+          ease: "power2.out",
           clearProps: "transform,opacity",
           onStart: () => {
-            pageParticles.burstOnElement(document.querySelector(".hero-portrait"), 46);
+            const videoEl = document.getElementById("heroVideo");
+            if (videoEl && videoEl.paused) {
+              videoEl.play().catch(() => {});
+            }
+            pageParticles.burstOnElement(document.querySelector(".hero-stage"), 48);
           }
         },
-        0.12
+        0
       )
       .fromTo(
         ".hero-cartouche",
