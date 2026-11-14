@@ -195,6 +195,7 @@
       <nav class="primary-nav" id="primaryNav" aria-label="Navegación principal">
         <ul class="nav-list">
           <li><a href="#inicio" class="nav-link is-active">Inicio</a></li>
+          <li><a href="#agradecimiento" class="nav-link">Agradecimiento</a></li>
           <li><a href="#evento" class="nav-link">Evento</a></li>
           <li><a href="#vestimenta" class="nav-link">Vestimenta</a></li>
           <li><a href="#regalos" class="nav-link">Regalos</a></li>
@@ -342,6 +343,82 @@
           width="655"
           height="118"
         >
+      </div>
+    </section>
+
+    <!-- ==================== SECCIÓN DE PRESENTACIÓN DE HONOR Y PERGAMINO DE AGRADECIMIENTO ==================== -->
+    <section class="honor-gratitude-section" id="agradecimiento" aria-labelledby="honorTitle">
+      <div class="honor-gratitude-grid">
+
+        <!-- Tarjeta 1: Presentación de Honor con Nombre Completo de la Quinceañera -->
+        <article class="royal-stage-card honor-stage-card reveal-item">
+          <img
+            src="assets/decor/tarjeta-honor-emily.png"
+            alt="Marco real con rosa encantada bajo cúpula de cristal, candelabro dorado sobre libros antiguos y juego de té de La Bella y la Bestia"
+            class="royal-stage-card__bg"
+            width="888"
+            height="1698"
+            loading="lazy"
+            decoding="async"
+          >
+
+          <!-- Texto de invitación superior sobre el pergamino -->
+          <div class="honor-stage-card__invite">
+            <p class="honor-invite-text">
+              Tenemos el honor de invitarte a<br>
+              los <span class="honor-invite-highlight">XV Años</span> de
+            </p>
+          </div>
+
+          <!-- Cartela azul marino y oro con el nombre completo -->
+          <div class="honor-stage-card__plaque-name">
+            <h2 class="honor-quince-fullname" id="honorTitle">
+              <span>Emily Charlotte</span>
+              <span>Tuch Espinoza</span>
+            </h2>
+          </div>
+        </article>
+
+        <!-- Tarjeta 2: Pergamino Real de Agradecimiento -->
+        <article class="royal-stage-card gratitude-stage-card reveal-item" aria-label="Mensaje de agradecimiento de Emily">
+          <img
+            src="assets/decor/pergamino-agradecimiento.png"
+            alt="Pergamino real desplegado con cortinas azul marino, mariposa de filigrana dorada, rosa encantada y decoración de La Bella y la Bestia"
+            class="royal-stage-card__bg"
+            width="918"
+            height="1626"
+            loading="lazy"
+            decoding="async"
+          >
+
+          <!-- Mensaje de agradecimiento dentro del pergamino -->
+          <div class="gratitude-stage-card__scroll">
+            <div class="gratitude-scroll-content">
+              <p class="gratitude-paragraph">
+                En este día tan especial, agradezco primeramente a Dios por regalarme la vida, guiar mis pasos y permitirme llegar a este momento tan esperado. A la Virgen María, por acompañarme y protegerme bajo su manto desde el primer día.
+              </p>
+              <p class="gratitude-paragraph">
+                A mi familia, gracias por su amor, sus enseñanzas y por estar siempre a mi lado. Y a todas las personas que han formado parte de mi historia, gracias por acompañarme en esta celebración.
+              </p>
+              <p class="gratitude-paragraph">
+                Hoy comienzo una nueva etapa llena de sueños e ilusiones, feliz y agradecida de compartir mis XV años con quienes más quiero.
+              </p>
+              <p class="gratitude-paragraph">
+                Que Dios siga guiando mi camino y la Virgen María protegiéndome siempre.
+              </p>
+
+              <div class="gratitude-rose-divider" aria-hidden="true">
+                <span class="gratitude-rose-divider__line"></span>
+                <span class="gratitude-rose-divider__flower">🌹</span>
+                <span class="gratitude-rose-divider__line"></span>
+              </div>
+
+              <p class="gratitude-closing">Con todo mi cariño,</p>
+              <p class="gratitude-signature">Emily.</p>
+            </div>
+          </div>
+        </article>
+
       </div>
     </section>
 
@@ -620,73 +697,6 @@
           Por favor, confirma tu asistencia<br>
           a más tardar el 24 de noviembre.
         </p>
-
-        <!-- Formulario compacto de confirmación directa -->
-        <form id="rsvpForm" class="rsvp-form-card" novalidate aria-label="Formulario rápido para confirmar asistencia">
-          <div class="rsvp-form-card__inner">
-            <label for="guestNameInput" class="rsvp-form-card__label">
-              Registra tu nombre para confirmar tu asistencia:
-            </label>
-            <div class="rsvp-form-card__row">
-              <input
-                type="text"
-                id="guestNameInput"
-                name="guestName"
-                class="rsvp-input"
-                placeholder="Escribe tu nombre y apellido..."
-                autocomplete="name"
-                maxlength="90"
-                required
-              >
-              <button type="submit" id="submitRsvpBtn" class="btn-burgundy-cta rsvp-submit-btn">
-                <span class="rsvp-submit-btn__sparkle" aria-hidden="true">✦</span>
-                <span id="submitRsvpLabel">Confirmar asistencia</span>
-                <span class="rsvp-submit-btn__sparkle" aria-hidden="true">✦</span>
-              </button>
-            </div>
-            <p id="rsvpFormFeedback" class="rsvp-form-feedback" role="status" aria-live="polite"></p>
-          </div>
-        </form>
-
-        <p class="confirmacion-whatsapp-caption">O confirma directamente por WhatsApp:</p>
-
-        <div class="confirmacion-actions">
-          <!-- Botón 1: Emily -->
-          <a
-            href="#confirmacion"
-            id="btnWhatsappEmily"
-            class="btn-gold btn-gold--rsvp"
-            data-contact="emily"
-            aria-label="Confirmar asistencia por WhatsApp con Emily"
-          >
-            <span class="btn-gold__icon" aria-hidden="true">
-              <svg viewBox="0 0 28 28" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="14" cy="9.5" r="4.5"/>
-                <path d="M5.5 23.5c0-4.4 3.8-7.5 8.5-7.5s8.5 3.1 8.5 7.5Z"/>
-              </svg>
-            </span>
-            <span class="btn-gold__text">Emily</span>
-          </a>
-
-          <!-- Botón 2: Mamá -->
-          <a
-            href="#confirmacion"
-            id="btnWhatsappMama"
-            class="btn-gold btn-gold--rsvp"
-            data-contact="mama"
-            aria-label="Confirmar asistencia por WhatsApp con Mamá"
-          >
-            <span class="btn-gold__icon" aria-hidden="true">
-              <svg viewBox="0 0 32 28" width="27" height="24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11.5" cy="9" r="4.3"/>
-                <path d="M3.5 23.5c0-4.2 3.6-7.2 8-7.2s8 3 8 7.2Z"/>
-                <circle cx="22.5" cy="11.5" r="3.2"/>
-                <path d="M18.5 23.5c.6-2.9 2.6-5 5.5-5 2.6 0 4.8 1.9 5.3 5Z"/>
-              </svg>
-            </span>
-            <span class="btn-gold__text">Mamá</span>
-          </a>
-        </div>
       </div>
     </section>
 
@@ -706,60 +716,6 @@
     </footer>
 
   </main>
-
-  <!-- ==================== MODAL MÁGICO PERSONALIZADO DE AGRADECIMIENTO ==================== -->
-  <div
-    id="thankYouModal"
-    class="magic-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modalTitle"
-    aria-describedby="modalSpeech"
-    aria-hidden="true"
-  >
-    <div id="magicModalBackdrop" class="magic-modal__backdrop"></div>
-
-    <div class="magic-modal__card">
-      <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="magic-modal__corner magic-modal__corner--tl" width="1254" height="1254">
-      <img src="assets/dercha.png" alt="" aria-hidden="true" class="magic-modal__corner magic-modal__corner--tr" width="1254" height="1254">
-      <img src="assets/adornoizquierda.png" alt="" aria-hidden="true" class="magic-modal__corner magic-modal__corner--bl" width="1254" height="1254">
-      <img src="assets/dercha.png" alt="" aria-hidden="true" class="magic-modal__corner magic-modal__corner--br" width="1254" height="1254">
-
-      <button type="button" id="closeModalTopBtn" class="magic-modal__close-x" aria-label="Cerrar mensaje de agradecimiento">
-        ✕
-      </button>
-
-      <div class="magic-modal__rose-wrap" aria-hidden="true">
-        <span class="magic-modal__rose-aura"></span>
-        <img src="assets/rosa.png" alt="" class="magic-modal__rose" width="1122" height="1402">
-      </div>
-
-      <p class="magic-modal__eyebrow">✦ Confirmación Real Registrada ✦</p>
-
-      <h3 id="modalTitle" class="magic-modal__title">
-        ¡Gracias de corazón, <span id="modalGuestName" class="magic-modal__guest-highlight">Invitado</span>!
-      </h3>
-
-      <div id="modalSpeech" class="magic-modal__speech">
-        <p>
-          Dicen que los cuentos de hadas más hermosos no se escriben en libros, sino en el corazón de las personas que iluminan nuestra vida.
-          Querido/a <strong id="modalSpeechName">Invitado</strong>, saber que me acompañarás en esta conmemoración tan especial enciende una estrella más en este sueño hecho realidad.
-        </p>
-        <p>
-          Gracias por ser parte de mis <strong>XV Años</strong> y acompañarme en una velada donde la magia, la ilusión y la alegría vestirán de gala nuestro corazón.
-          ¡El salón real te espera el <strong>sábado 13 de diciembre a las 6:30 p. m.</strong>!
-        </p>
-      </div>
-
-      <p class="magic-modal__signature">Con todo mi cariño, Emily 🌹✨</p>
-
-      <button type="button" id="closeModalBtn" class="curtain-open-btn magic-modal__cta">
-        <span class="curtain-open-btn__sparkle" aria-hidden="true">✦</span>
-        <span>¡Allí estaré para celebrar!</span>
-        <span class="curtain-open-btn__sparkle" aria-hidden="true">✦</span>
-      </button>
-    </div>
-  </div>
 
   <!-- GSAP 3 + ScrollTrigger para animaciones mágicas de presentación -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>

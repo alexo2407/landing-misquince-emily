@@ -567,6 +567,21 @@ const GUESTS_STORAGE_KEY = "quince_emily_invitados_v1";
                 }
               );
             }
+          } else if (target.classList.contains("royal-stage-card")) {
+            pageParticles.burstOnElement(target, 48);
+
+            gsap.fromTo(
+              target,
+              { y: 32, scale: 0.96, opacity: 0.28 },
+              {
+                y: 0,
+                scale: 1,
+                opacity: 1,
+                duration: 1.0,
+                ease: "power3.out",
+                clearProps: "transform,opacity"
+              }
+            );
           } else if (target.classList.contains("parchment-card")) {
             const plaque = target.querySelector(".card-plaque");
             pageParticles.burstOnElement(plaque || target, 44);
@@ -676,7 +691,7 @@ const GUESTS_STORAGE_KEY = "quince_emily_invitados_v1";
     );
 
     document
-      .querySelectorAll("#evento, .parchment-card, .transition-banner-section, #confirmacion")
+      .querySelectorAll("#evento, .royal-stage-card, .parchment-card, .transition-banner-section, #confirmacion")
       .forEach((sec) => sectionObserver.observe(sec));
   }
 
