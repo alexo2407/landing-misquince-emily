@@ -33,7 +33,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600;1,700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=20261114b">
 </head>
 <body class="is-curtain-locked">
   <a class="skip-link" href="#inicio">Saltar al contenido principal</a>
@@ -221,9 +221,12 @@
             <div class="hero-stage">
               <video
                 id="heroVideo"
-                class="hero-video"
+                class="hero-video hero-backdrop"
                 src="assets/hero-emily.mp4"
                 poster="assets/chica-hero.png"
+                width="1672"
+                height="941"
+                style="position: absolute; inset: 0; width: 100%; height: 100%; max-width: 100%; object-fit: cover; object-position: center top;"
                 autoplay
                 loop
                 muted
@@ -350,8 +353,8 @@
             src="assets/decor/tarjeta-honor-emily.png"
             alt="Marco real con rosa encantada bajo cúpula de cristal, candelabro dorado sobre libros antiguos y juego de té de La Bella y la Bestia"
             class="royal-stage-card__bg"
-            width="888"
-            height="1698"
+            width="941"
+            height="1672"
             loading="lazy"
             decoding="async"
           >
@@ -379,37 +382,32 @@
             src="assets/decor/pergamino-agradecimiento.png"
             alt="Pergamino real desplegado con cortinas azul marino, mariposa de filigrana dorada, rosa encantada y decoración de La Bella y la Bestia"
             class="royal-stage-card__bg"
-            width="918"
-            height="1626"
+            width="941"
+            height="1672"
             loading="lazy"
             decoding="async"
           >
 
-          <!-- Mensaje de agradecimiento dentro del pergamino -->
-          <div class="gratitude-stage-card__scroll">
-            <div class="gratitude-scroll-content">
-              <p class="gratitude-paragraph">
-                En este día tan especial, agradezco primeramente a Dios por regalarme la vida, guiar mis pasos y permitirme llegar a este momento tan esperado. A la Virgen María, por acompañarme y protegerme bajo su manto desde el primer día.
-              </p>
-              <p class="gratitude-paragraph">
-                A mi familia, gracias por su amor, sus enseñanzas y por estar siempre a mi lado. Y a todas las personas que han formado parte de mi historia, gracias por acompañarme en esta celebración.
-              </p>
-              <p class="gratitude-paragraph">
-                Hoy comienzo una nueva etapa llena de sueños e ilusiones, feliz y agradecida de compartir mis XV años con quienes más quiero.
-              </p>
-              <p class="gratitude-paragraph">
-                Que Dios siga guiando mi camino y la Virgen María protegiéndome siempre.
-              </p>
+          <!-- Párrafos de agradecimiento en la parte superior del pergamino (arriba de la rosa divisoria) -->
+          <div class="gratitude-stage-card__body">
+            <p class="gratitude-paragraph">
+              En este día tan especial, agradezco primeramente a Dios por regalarme la vida, guiar mis pasos y permitirme llegar a este momento tan esperado. A la Virgen María, por acompañarme y protegerme bajo su manto desde el primer día.
+            </p>
+            <p class="gratitude-paragraph">
+              A mi familia, gracias por su amor, sus enseñanzas y por estar siempre a mi lado. Y a todas las personas que han formado parte de mi historia, gracias por acompañarme en esta celebración.
+            </p>
+            <p class="gratitude-paragraph">
+              Hoy comienzo una nueva etapa llena de sueños e ilusiones, feliz y agradecida de compartir mis XV años con quienes más quiero.
+            </p>
+            <p class="gratitude-paragraph">
+              Que Dios siga guiando mi camino y la Virgen María protegiéndome siempre.
+            </p>
+          </div>
 
-              <div class="gratitude-rose-divider" aria-hidden="true">
-                <span class="gratitude-rose-divider__line"></span>
-                <span class="gratitude-rose-divider__flower">🌹</span>
-                <span class="gratitude-rose-divider__line"></span>
-              </div>
-
-              <p class="gratitude-closing">Con todo mi cariño,</p>
-              <p class="gratitude-signature">Emily.</p>
-            </div>
+          <!-- Despedida y firma debajo de la rosa divisoria del pergamino -->
+          <div class="gratitude-stage-card__footer">
+            <p class="gratitude-closing">Con todo mi cariño,</p>
+            <p class="gratitude-signature">Emily</p>
           </div>
         </article>
 
@@ -714,6 +712,6 @@
   <!-- GSAP 3 + ScrollTrigger para animaciones mágicas de presentación -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js?v=20261114b" defer></script>
 </body>
 </html>
