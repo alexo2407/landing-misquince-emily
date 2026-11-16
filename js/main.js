@@ -10,12 +10,12 @@ const WHATSAPP_CONFIG = Object.freeze({
   emily: {
     phone: "", // <-- Colocar aquí el número telefónico real de Emily
     message:
-      "¡Hola Emily! Con mucha alegría confirmo mi asistencia a la celebración de tus XV Años el sábado 13 de diciembre a las 6:30 p. m. ¡Muchas gracias por la invitación!"
+      "¡Hola Emily! Con mucha alegría confirmo mi asistencia a la celebración de tus XV Años el domingo 13 de diciembre a las 6:30 p. m. ¡Muchas gracias por la invitación!"
   },
   mama: {
     phone: "", // <-- Colocar aquí el número telefónico real de Mamá
     message:
-      "¡Hola! Con mucho gusto confirmo mi asistencia a los XV Años de Emily el sábado 13 de diciembre a las 6:30 p. m. ¡Muchas gracias por la invitación!"
+      "¡Hola! Con mucho gusto confirmo mi asistencia a los XV Años de Emily el domingo 13 de diciembre a las 6:30 p. m. ¡Muchas gracias por la invitación!"
   }
 });
 
